@@ -20,6 +20,7 @@ public class CustomerController {
 
     @GetMapping
     public List<Customer> listCustomers(){
+        return customerService.listCustomers();
     }
 
 
