@@ -21,6 +21,15 @@ public class CustomerController {
 
     private final CustomerService customerService;
 
+    @PutMapping("{id}")
+    public ResponseEntity editCustomerById(@PathVariable UUID id, @RequestBody Customer customer){
+        Customer savedCustomer = customerService.updateCustomer(id, customer);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Location", "api/v1/customer/" + savedCustomer.getUuid().toString());
+        return new ResponseEntity(headers, HttpStatus.NO_CONTENT);
+    }
+
     @PostMapping()
     public ResponseEntity addCustomer(@RequestBody Customer customer){
         Customer savedCustomer = customerService.saveNewCustomer(customer);
