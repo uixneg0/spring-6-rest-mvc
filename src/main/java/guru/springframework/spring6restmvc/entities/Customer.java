@@ -16,6 +16,7 @@ import java.util.UUID;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Customer {
     @Id
     @GeneratedValue(generator = "UUID")
@@ -28,4 +29,6 @@ public class Customer {
     private Integer version;
     private LocalDateTime createdDate;
     private LocalDateTime updateDate;
+
+
 }
