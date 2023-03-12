@@ -5,12 +5,13 @@ import guru.springframework.spring6restmvc.entities.Customer;
 import guru.springframework.spring6restmvc.repositories.BeerRepository;
 import guru.springframework.spring6restmvc.repositories.CustomerRepository;
 import net.bytebuddy.build.ToStringPlugin;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 class BootstrapDataTest {
@@ -31,12 +32,7 @@ class BootstrapDataTest {
     @Test
     void testBootstrap() throws Exception {
         bootstrapData.run();
-        for (Customer customer : customerRepository.findAll()){
-            System.out.println(customer);
-        }
-
-        for (Beer beer  : beerRepository.findAll()){
-            System.out.println(beer);
-        }
+        Assertions.assertThat(beerRepository.count()).isEqualTo(2);
+        Assertions.assertThat(customerRepository.count()).isEqualTo(2);
     }
 }
